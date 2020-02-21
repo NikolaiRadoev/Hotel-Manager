@@ -9,10 +9,13 @@ namespace HotelManagr.Data.Models_Entitys_
     public class Room : BaseEntity
     {
         public int Capacity { get; set; }
-        public List<string> RoomType { get; set; }
+        public string RoomType { get; set; }
         public bool FreeRoom { get; set; }
-        public decimal PricePerAdult { get; set; }
-        public decimal PricePerKid { get; set; }
+        public double PricePerAdult { get; set; }
+        public double PricePerKid { get; set; }
         public int RoomNumber { get; set; }
+
+        //za vruzka s Room-Reservation     
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

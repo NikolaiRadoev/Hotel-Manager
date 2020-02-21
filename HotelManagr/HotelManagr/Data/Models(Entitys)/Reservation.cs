@@ -8,10 +8,16 @@ namespace HotelManagr.Data.Models_Entitys_
 {
     public class Reservation : BaseEntity
     {
-        public int ReservedRoomId { get; set; }
 
-        public int ClientReservator { get; set; }
-        //spisuk s klienti koito shte se pomeshtavat v staqta
+//za vruzka sus staq
+        public int RoomId { get; set; }
+        public virtual Room ReservedRoom { get; set; }
+
+ //Za vruzka s client
+
+        public virtual ICollection<ClientReservation> ClientReservations { get; set; }
+ //spisuk s klienti koito shte se pomeshtavat v staqta
+        
         public DateTime CheckIn { get; set; }
 
         public DateTime CheckOut { get; set; }
@@ -20,11 +26,12 @@ namespace HotelManagr.Data.Models_Entitys_
 
         public bool AllInclusive { get; set; }
 
-        public decimal Bills { get; set; }
+        public double Bills { get; set; }
 
         //Za vruzkata mejdu Usera i Rezervaciqta
-        public int UserId { get; set; }
-        public virtual User User { get; set;
-        }
+        public string UserId { get; set; }
+        public virtual User User { get; set;}
+
+       
     }
 }
