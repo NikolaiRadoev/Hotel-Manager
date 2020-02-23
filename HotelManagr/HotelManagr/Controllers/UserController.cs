@@ -1,4 +1,5 @@
 ﻿using HotelManagr.Services.Contracts;
+using HotelManagr.ViewModels;
 using HotelManagr.ViewModels.UserViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,17 +18,37 @@ namespace HotelManagr.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateNewUser()
+        public IActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult CreateNewUser(RegisterUserViewModel newUser)
+        public IActionResult Register(RegisterUserViewModel newUser)
         {
             bool result = userServices.CreateNewUser(newUser).Result;
             if (!result)
             {
                 return this.View(newUser);
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult LogIn(LogInUserViewModel userLogIn)
+        {
+            bool result = userServices.LogIn(userLogIn).Result;
+            if (!result)
+            {
+                return this.View(userLogIn);
             }
             else
             {

@@ -1,4 +1,5 @@
 ﻿using HotelManagr.Data.Models_Entitys_;
+using HotelManagr.ViewModels;
 using HotelManagr.ViewModels.UserViewModel;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,8 @@ namespace HotelManagr.Services.Contracts
         Task<bool> CreateNewUser(RegisterUserViewModel newUser);
         string EditUser(int/*string*/ id, User userEdit);
         string RemoveUserById(int id);
+        Task<User> GetUser(string username);
+        Task<bool> LogIn(LogInUserViewModel userLog);
+        void LogOut();
     }
 }

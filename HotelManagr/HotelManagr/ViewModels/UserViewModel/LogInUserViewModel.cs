@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HotelManagr.ViewModels
+namespace HotelManagr.ViewModels.UserViewModel
 {
     public class LogInUserViewModel
     {
@@ -13,7 +13,7 @@ namespace HotelManagr.ViewModels
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name="Password")]
+        [DataType(DataType.Password)]/*[Display(Name="Password")]*/
         public string Password { get; set; }
     }
 }

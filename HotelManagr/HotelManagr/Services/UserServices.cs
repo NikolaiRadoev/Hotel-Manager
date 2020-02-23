@@ -1,6 +1,7 @@
 ﻿using HotelManagr.Data;
 using HotelManagr.Data.Models_Entitys_;
 using HotelManagr.Services.Contracts;
+using HotelManagr.ViewModels;
 using HotelManagr.ViewModels.UserViewModel;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -25,6 +26,17 @@ namespace HotelManagr.Services
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+        }
+
+        public async Task<bool> LogIn(LogInUserViewModel userLog)
+        {
+            var user = this.GetUser(userLog.UserName).Result;
+            if (user==null)
+            {
+                return false;
+            }
+            var result = await this.signInManager.PasswordSignInAsync(user, userLog.Password, isPersistent: false, lockoutOnFailure: false);
+            return result.Succeeded;
         }
 
         public async Task<bool> CreateNewUser(RegisterUserViewModel newUser)
@@ -83,6 +95,17 @@ namespace HotelManagr.Services
         public string RemoveUserById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<User> GetUser(string username)
+        {
+            var user = await this.userManager.FindByNameAsync(username);
+            return user;
+        }
+
+        public async void LogOut()
+        {
+            await this.signInManager.SignOutAsync();
         }
     }
 }

@@ -12,6 +12,9 @@ using HotelManagr.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using HotelManagr.Services.Contracts;
+using HotelManagr.Services;
+using HotelManagr.Data.Models_Entitys_;
 
 namespace HotelManagr
 {
@@ -30,10 +33,15 @@ namespace HotelManagr
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            /*Dobaveno ot MeN////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+            services.AddTransient<IUserServices, UserServices>(); 
+            
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
