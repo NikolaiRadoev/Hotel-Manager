@@ -76,10 +76,42 @@ namespace HotelManagr.Services
             return true;
         }
 
-        public string EditUser(int/*string*/ id, User userEdit)
+        public async Task<bool> EditUser(EditUserViewModel editUser)//ne sam siguren
         {
-            throw new NotImplementedException();
-            
+            //throw new NotImplementedException();
+            if (editUser.UserName == null ||
+                editUser.Password == null ||
+                editUser.FirstName == null ||
+                editUser.MiddleName == null ||
+                editUser.LastName == null ||
+                editUser.PersonalNumber == null ||
+                editUser.PhoneNumber == null ||
+                editUser.Email == null)
+                {
+                    return false;
+                }
+            //проверка за коректност на полетата от модела(ready)
+
+            var user = new User
+            {
+                //poletata ot modela => user(ready)
+                UserName = editUser.UserName,
+                Password = editUser.Password,
+                FirstName = editUser.FirstName,
+                MiddleName = editUser.MiddleName,
+                LastName = editUser.LastName,
+                PersonalNumber = editUser.PersonalNumber,
+                PhoneNumber = editUser.PhoneNumber,
+                Email = editUser.Email
+            };
+
+            var userEditResult = await this.userManager.UpdateAsync(user);
+
+            if (!userEditResult.Succeeded)
+            {
+                return false;
+            }
+            return true;
         }
 
         public IEnumerable<User> GetAll()
@@ -89,12 +121,22 @@ namespace HotelManagr.Services
             dbContext.SaveChanges();*/
             /*var users = await this.userManager.Users.ToList();
             return users;*/
-
+            
         }
 
-        public string RemoveUserById(int id)
+        public async Task<bool> RemoveUserById(RemoveUserViewModel userId)//ne sam siguren
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            if (userId.Id==null)
+            {
+                return false;
+            }
+            var user = new User
+            {
+                Id = userId.Id
+            };
+            var userRemove = await this.userManager.DeleteAsync(user);
+            return userRemove.Succeeded;
         }
 
         public async Task<User> GetUser(string username)

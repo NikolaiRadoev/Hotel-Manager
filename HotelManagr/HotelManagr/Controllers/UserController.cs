@@ -36,6 +36,42 @@ namespace HotelManagr.Controllers
                 return Redirect("/");
             }
         }
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Edit(EditUserViewModel editUser)
+        {
+            bool result = userServices.EditUser(editUser).Result;
+            if (!result)
+            {
+                return this.View(editUser);
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Delete(RemoveUserViewModel removeUser)
+        {
+            bool result = userServices.RemoveUserById(removeUser).Result;
+            if (!result)
+            {
+                return this.View(removeUser);
+            }
+            else
+            {
+                return Redirect("/");
+            }
+        }
 
         [HttpGet]
         public IActionResult LogIn()
@@ -55,5 +91,15 @@ namespace HotelManagr.Controllers
                 return Redirect("/");
             }
         }
+
+
+        [HttpGet]
+        public IActionResult LogOut()//za post metod ne sam siguren
+        {
+            return Redirect("/");//View();
+        }
+        
+        //GetAll
+        //moje bi i GetUser
     }
 }

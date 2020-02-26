@@ -12,8 +12,9 @@ namespace HotelManagr.Services.Contracts
     {
         IEnumerable<User> GetAll();
         Task<bool> CreateNewUser(RegisterUserViewModel newUser);
-        string EditUser(int/*string*/ id, User userEdit);
-        string RemoveUserById(int id);
+        //string EditUser(int/*string*/ id, User userEdit);
+        Task<bool> EditUser(EditUserViewModel editUser);
+        Task<bool> RemoveUserById(RemoveUserViewModel userId);
         Task<User> GetUser(string username);
         Task<bool> LogIn(LogInUserViewModel userLog);
         void LogOut();
