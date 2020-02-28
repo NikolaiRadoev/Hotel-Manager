@@ -121,7 +121,6 @@ namespace HotelManagr.Services
             dbContext.SaveChanges();*/
             /*var users = await this.userManager.Users.ToList();
             return users;*/
-            
         }
 
         public async Task<bool> RemoveUserById(RemoveUserViewModel userId)//ne sam siguren
@@ -144,7 +143,12 @@ namespace HotelManagr.Services
             var user = await this.userManager.FindByNameAsync(username);
             return user;
         }
+// trqbva da ima metod za Rezervations
+// trqbva da se opredeli admin
+//user views(za rezervaciqta za proverka na  stai clienti)
+// admin views(osven tiq na user,za redakciq iztriv i naznachavane na user stai i uslugi(na stai klienti))
 
+//za toq metod na redakciq na potrebitel ne sam opredelil kak shte se otkriva koi potrebitel da se redaktira
         public async void LogOut()
         {
             await this.signInManager.SignOutAsync();
