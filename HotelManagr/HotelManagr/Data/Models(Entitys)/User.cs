@@ -36,7 +36,7 @@ namespace HotelManagr.Data.Models_Entitys_
 
         public DateTime FreeFromWorkUser { get; set; }
         //admin
-
+        public bool IsAdministrator { get; set; }
 
         //public int ReservationId { get; set; }
 

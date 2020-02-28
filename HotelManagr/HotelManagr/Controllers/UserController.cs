@@ -20,6 +20,7 @@ namespace HotelManagr.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            //moje bi trqqbva da se inicializira VIEWMODELA
             return View();
         }
 

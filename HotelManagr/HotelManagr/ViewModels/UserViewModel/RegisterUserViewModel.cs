@@ -33,5 +33,19 @@ namespace HotelManagr.ViewModels.UserViewModel
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         
+        [Required]
+        [Display(Name = "Admin Or Not")]
+        public bool IsAdministrator { get; set; }
+
+        [Required]
+        [Display(Name = "Is active")]
+        public bool IsActive { get; set; }
+       /* //trq da napravq da dava greshki ako ima takiva danni
+        [Required]
+        [DataType(DataType.Text,ErrorMessage="Error found in FirstName")]
+        [MaxLength(20)]
+        public string FirstLastMiddle Egn {get;set;}
+        otgore
+        */
     }
 }

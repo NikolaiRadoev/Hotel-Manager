@@ -1,5 +1,6 @@
 ﻿using HotelManagr.Data;
 using HotelManagr.Data.Models_Entitys_;
+using HotelManagr.Initialisation;
 using HotelManagr.Services.Contracts;
 using HotelManagr.ViewModels;
 using HotelManagr.ViewModels.UserViewModel;
@@ -21,11 +22,13 @@ namespace HotelManagr.Services
         }*/
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
+      //  private ApplicationDbContext context;
 
         public UserServices(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+           // this.context = context;
         }
 
         public async Task<bool> LogIn(LogInUserViewModel userLog)
@@ -64,12 +67,29 @@ namespace HotelManagr.Services
                 LastName = newUser.LastName,
                 PersonalNumber = newUser.PersonalNumber,
                 PhoneNumber = newUser.PhoneNumber,
-                Email = newUser.Email
+                Email = newUser.Email,
+                ActiveOrNotActiveAccount=true,
+                IsAdministrator=newUser.IsAdministrator
             };
 
             var userCreateResult = await this.userManager.CreateAsync(user, newUser.Password);
 
             if (!userCreateResult.Succeeded)
+            {
+                return false;
+            }
+
+            IdentityResult addRoleResult ;
+            if (newUser.IsAdministrator)
+            {
+                addRoleResult = await this.userManager.AddToRoleAsync(user, GlobalConstants.AdminRole);
+            }
+            else
+            {
+                addRoleResult = await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRole);
+            }
+
+            if (!addRoleResult.Succeeded)
             {
                 return false;
             }
@@ -105,6 +125,8 @@ namespace HotelManagr.Services
                 Email = editUser.Email
             };
 
+            //moje bi trqbva da se kaje che samo admin moje
+
             var userEditResult = await this.userManager.UpdateAsync(user);
 
             if (!userEditResult.Succeeded)
@@ -116,11 +138,12 @@ namespace HotelManagr.Services
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             /*dbContext.Users.ToList();
             dbContext.SaveChanges();*/
             /*var users = await this.userManager.Users.ToList();
             return users;*/
+            return this.userManager.Users.AsEnumerable<User>();
         }
 
         public async Task<bool> RemoveUserById(RemoveUserViewModel userId)//ne sam siguren
@@ -134,6 +157,9 @@ namespace HotelManagr.Services
             {
                 Id = userId.Id
             };
+
+            //i tuka moje bi trqbva da se kaje che samo admin moje
+
             var userRemove = await this.userManager.DeleteAsync(user);
             return userRemove.Succeeded;
         }

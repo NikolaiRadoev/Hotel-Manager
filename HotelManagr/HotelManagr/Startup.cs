@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using HotelManagr.Services.Contracts;
 using HotelManagr.Services;
 using HotelManagr.Data.Models_Entitys_;
+using HotelManagr.Initialisation;
 
 namespace HotelManagr
 {
@@ -33,20 +34,38 @@ namespace HotelManagr
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             /*Dobaveno ot MeN////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-            services.AddTransient<IUserServices, UserServices>(); 
+
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 1;
+            })
+              .AddDefaultUI()
+              .AddDefaultTokenProviders()
+              .AddEntityFrameworkStores<ApplicationDbContext>();
+           
             
             services.AddMvc();
+            services.AddTransient<IUserServices, UserServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDatabaseMigration();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
