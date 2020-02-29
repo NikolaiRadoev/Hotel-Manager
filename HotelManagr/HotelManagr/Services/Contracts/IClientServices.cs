@@ -9,10 +9,10 @@ namespace HotelManagr.Services.Contracts
 {
     public interface IClientServices
     {
-        //Task<bool> CreateNewClient(RegisterClientViewModel newClient);
-        //Task<bool> EditClient(EditClientViewModel editClient);
-        //IEnumerable<Client> GetAll();
-        //Task<Client> GetClient(string clientName);
-        //Task<bool> DeleteClient(DeleteClientViewModel deleteClient);
+        Task<bool> CreateNewClient(RegisterClientViewModel newClient);
+        Task<bool> EditClient(EditClientViewModel editClient);
+        IEnumerable<Client> GetAll();
+        Task<Client> GetClient(string clientName);
+        Task<bool> DeleteClient(DeleteClientViewModel deleteClient);
     }
 }

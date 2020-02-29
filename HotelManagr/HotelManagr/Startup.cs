@@ -44,7 +44,7 @@ namespace HotelManagr
             services.AddRazorPages();
             /*Dobaveno ot MeN////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-
+            //Tozi metod se izpolzva za opredelqne na roli(admin,user)
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
