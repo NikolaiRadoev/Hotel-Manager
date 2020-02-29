@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace HotelManagr.Services
@@ -18,7 +19,78 @@ namespace HotelManagr.Services
         {
             this.context = context;
         }
-        public async Task<bool> CreateNewClient(RegisterClientViewModel newClient)
+
+        public bool CreateNewClient(RegisterClientViewModel modelClient)
+        {
+            Client newClient = new Client
+            {
+                FirstName = modelClient.FirstName,
+                LastName=modelClient.LastName,
+                PhoneNumber=modelClient.PhoneNumber,
+                Email=modelClient.Email,
+                IsAdult=modelClient.IsAdult
+            };
+            this.context.Clients.Add(newClient);
+            this.context.SaveChanges();
+            newClient = GetClient(newClient.Id);
+            if (newClient is null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool DeleteClient(DeleteClientViewModel deleteClient)
+        {
+            //throw new NotImplementedException();
+            Client client = new Client
+            {
+                Id = deleteClient.Id
+            };
+            this.context.Clients.Remove(client);
+            this.context.SaveChanges();
+            return true;
+        }
+
+        public bool EditClient(EditClientViewModel editClient)
+        {
+            //throw new NotImplementedException();
+            Client client = new Client
+            {
+                FirstName = editClient.FirstName,
+                LastName = editClient.LastName,
+                PhoneNumber = editClient.PhoneNumber,
+                Email = editClient.Email,
+                IsAdult = editClient.IsAdult
+            };
+            this.context.Clients.Update(client);
+            this.context.SaveChanges();
+            return true;
+        }
+
+        public IEnumerable<Client> GetAll()
+        {
+            //throw new NotImplementedException();
+            return this.context.Clients.AsEnumerable();
+        }
+        public IEnumerable<Client> GetAll(Expression<Func<Client, bool>> predicate)
+        {
+            return this.context.Clients.Where(predicate).AsEnumerable();
+        }
+
+        public Client GetClient(int id)
+        {
+            //throw new NotImplementedException();
+            return this.context.Clients.Find(id);
+        }
+        public Client GetClient(Expression<Func<Client, bool>> predicate)
+        {
+            return this.context.Clients.FirstOrDefault(predicate);
+        }
+            //moje da swe dobavi za nqkuv broi Count
+ 
+
+        /*public async Task<bool> CreateNewClient(RegisterClientViewModel newClient)
         {
             //throw new NotImplementedException();
             if (newClient.FirstName==null ||
@@ -49,7 +121,7 @@ namespace HotelManagr.Services
             { Id = deleteClient.Id };
             context.Clients.Remove(clientn);
             context.SaveChanges();
-            return true;*/
+            return true;
 
         }
 
@@ -86,6 +158,6 @@ namespace HotelManagr.Services
         {
             throw new NotImplementedException();
             //var client = this.context.Find(clientName);
-        }
+        }*/
     }
 }

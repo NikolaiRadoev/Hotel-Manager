@@ -15,7 +15,8 @@ namespace HotelManagr.Services.Contracts
         //string EditUser(int/*string*/ id, User userEdit);
         Task<bool> EditUser(EditUserViewModel editUser);
         Task<bool> RemoveUserById(RemoveUserViewModel userId);
-        Task<User> GetUser(string username);
+        Task<User> GetUserByName(string username);
+        Task<User> GetUserById(string id);
         Task<bool> LogIn(LogInUserViewModel userLog);
         void LogOut();
     }

@@ -33,7 +33,7 @@ namespace HotelManagr.Services
 
         public async Task<bool> LogIn(LogInUserViewModel userLog)
         {
-            var user = this.GetUser(userLog.UserName).Result;
+            var user = this.GetUserByName(userLog.UserName).Result;
             if (user==null)
             {
                 return false;
@@ -164,7 +164,13 @@ namespace HotelManagr.Services
             return userRemove.Succeeded;
         }
 
-        public async Task<User> GetUser(string username)
+        public async Task<User> GetUserById(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id);
+            return user;
+        }
+
+        public async Task<User> GetUserByName(string username)
         {
             var user = await this.userManager.FindByNameAsync(username);
             return user;

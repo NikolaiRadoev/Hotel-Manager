@@ -1,4 +1,5 @@
-﻿using HotelManagr.Services.Contracts;
+﻿using HotelManagr.Data.Models_Entitys_;
+using HotelManagr.Services.Contracts;
 using HotelManagr.ViewModels;
 using HotelManagr.ViewModels.UserViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +39,22 @@ namespace HotelManagr.Controllers
             }
         }
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(string id)
         {
-            return View();
+            User userForEdit = userServices.GetUserById(id).Result;
+            EditUserViewModel model = new EditUserViewModel
+            {
+                Id = userForEdit.Id,
+                FirstName = userForEdit.FirstName,
+
+                UserName = userForEdit.UserName,
+                MiddleName = userForEdit.MiddleName,
+                LastName = userForEdit.LastName,
+                PersonalNumber = userForEdit.PersonalNumber,
+                PhoneNumber = userForEdit.PhoneNumber,
+                Email = userForEdit.Email
+            };
+            return View(model);
         }
         [HttpPost]
         public IActionResult Edit(EditUserViewModel editUser)
@@ -58,6 +72,11 @@ namespace HotelManagr.Controllers
         [HttpGet]
         public IActionResult Delete()
         {
+            //User userForDelete = userServices.GetUserById(id).Result;
+            //RemoveUserViewModel model = new RemoveUserViewModel
+            //{
+             //   Id = userForDelete.Id
+           // };
             return View();
         }
         [HttpPost]
@@ -93,14 +112,36 @@ namespace HotelManagr.Controllers
             }
         }
 
-
         [HttpGet]
         public IActionResult LogOut()//za post metod ne sam siguren
         {
+            this.userServices.LogOut();
             return Redirect("/");//View();
         }
         
         //GetAll
         //moje bi i GetUser
+
+        public IActionResult All()
+        {
+            List<Data.Models_Entitys_.User> Users = userServices.GetAll().ToList();
+
+            List<EditUserViewModel> model = Users.Select(u => new EditUserViewModel
+            {
+                Id=u.Id,
+                UserName=u.UserName,
+                FirstName = u.FirstName,
+                MiddleName = u.MiddleName,
+                LastName = u.LastName,
+                PersonalNumber = u.PersonalNumber,
+                PhoneNumber = u.PhoneNumber,
+                Email = u.Email
+
+
+            }).ToList();
+
+            return View(model);
+        }
+
     }
 }

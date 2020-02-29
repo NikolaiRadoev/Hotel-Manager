@@ -4,6 +4,7 @@ using System.Text;
 using HotelManagr.Data.Models_Entitys_;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using HotelManagr.ViewModels.UserViewModel;
 
 namespace HotelManagr.Data
 {
@@ -49,5 +50,6 @@ namespace HotelManagr.Data
         {
             optionsBuilder.UseLazyLoadingProxies();
         }
+        public DbSet<HotelManagr.ViewModels.UserViewModel.EditUserViewModel> EditUserViewModel { get; set; }
     }
 }

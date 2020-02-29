@@ -1,0 +1,33 @@
+﻿@model HotelManagr.ViewModels.ClientViewModel.EditClientViewModel
+<main class="mt-3">
+    <h1 class="text-center">Edit</h1>
+    <hr class="bg-secondary half-width" />
+    <form class="mx-auto half-width" method="post" asp-controller="Client" asp-action="Edit">
+        <div class="form-group">
+            <label asp-for="FirstName">FirstName</label>
+            <input asp-for="FirstName" class="form-control" id="firstname" placeholder="FirstName...">
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName">LastName</label>
+            <!--<label asp-for="FirstName" class="form-control" id="firstname" placeholder="Firstname...">-->
+            <input asp-for="LastName" class="form-control" id="lastname" placeholder="LastName...">
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber">PhoneNumber</label>
+            <input asp-for="PhoneNumber" class="form-control" id="phonenumber" placeholder="PhoneNumber...">
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" id="email" placeholder="Email..." name="email">
+        </div>
+        <div class="form-group">
+            <!--ZA TOQ KLAS NE SAM SIGUREN-->
+            <label asp-for="IsAdult">IsAdult</label>
+            <input asp-for="IsAdult" class="form-control" id="isadult" placeholder="IsAdult..." name="isadult">
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn chushka-bg-color">Edit</button><!--v toq klas btn chushka-bg-color mai trq da e po drug nachin-->
+        </div>
+    </form>
+
+</main>
