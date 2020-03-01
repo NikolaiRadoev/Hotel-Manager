@@ -56,7 +56,7 @@ namespace HotelManagr.Services
         public bool EditRoom(EditRoomViewModel editRoom)
         {
             //throw new NotImplementedException();
-            Room room = new Room
+            /*Room room = new Room
             {
                 Capacity = editRoom.Capacity,
                 RoomType = editRoom.RoomType,
@@ -66,6 +66,27 @@ namespace HotelManagr.Services
                 RoomNumber = editRoom.RoomNumber
             };
             this.context.Rooms.Update(room);
+            this.context.SaveChanges();
+            return true;*/
+            if (editRoom.Capacity<0 ||
+                editRoom.RoomType==null ||
+               // editRoom.FreeRoom==null ||
+                editRoom.PricePerAdult<0 ||
+                editRoom.PricePerKid<0)
+            {
+                return false;
+            }
+
+            Room roomForEdit = context.Rooms.Find(editRoom.Id);
+
+            roomForEdit.Capacity = editRoom.Capacity;
+            roomForEdit.RoomType = editRoom.RoomType;
+            roomForEdit.FreeRoom = editRoom.FreeRoom;
+            roomForEdit.PricePerAdult = editRoom.PricePerAdult;
+            roomForEdit.PricePerKid = editRoom.PricePerKid;
+            roomForEdit.RoomNumber = editRoom.RoomNumber;
+
+            this.context.Rooms.Update(roomForEdit);
             this.context.SaveChanges();
             return true;
         }

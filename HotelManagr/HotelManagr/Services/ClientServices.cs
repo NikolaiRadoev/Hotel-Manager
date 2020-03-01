@@ -72,16 +72,17 @@ namespace HotelManagr.Services
                 editClient.Email==null)
             {
                 return false;
-            } 
-            Client client = new Client
-            {
-                FirstName = editClient.FirstName,
-                LastName = editClient.LastName,
-                PhoneNumber = editClient.PhoneNumber,
-                Email = editClient.Email,
-                IsAdult = editClient.IsAdult
-            };
-            this.context.Clients.Update(client);
+            }
+
+            Client clientForEdit = context.Clients.Find(editClient.Id);
+
+            clientForEdit.FirstName = editClient.FirstName;
+            clientForEdit.LastName = editClient.LastName;
+            clientForEdit.PhoneNumber = editClient.PhoneNumber;
+            clientForEdit.Email = editClient.Email;
+            clientForEdit.IsAdult = editClient.IsAdult;
+            
+            this.context.Clients.Update(clientForEdit);
             this.context.SaveChanges();
             return true;
 
