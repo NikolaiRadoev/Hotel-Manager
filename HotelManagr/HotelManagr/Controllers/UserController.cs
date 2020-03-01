@@ -46,7 +46,7 @@ namespace HotelManagr.Controllers
             {
                 Id = userForEdit.Id,
                 FirstName = userForEdit.FirstName,
-
+                Password = userForEdit.Password,
                 UserName = userForEdit.UserName,
                 MiddleName = userForEdit.MiddleName,
                 LastName = userForEdit.LastName,

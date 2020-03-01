@@ -14,28 +14,29 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <div>
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><font size="9"><b>Hello @User.Identity.Name!</b></font></a>
             </div>
 
             @if (User.IsInRole("Admin"))
             { //poleta samo za admini
-                <form class="form-inline" asp-controller="User" asp-action="Register">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Register new Employee</button>
-                </form>
-                <form class="form-inline" asp-controller="User" asp-action="All">
-                    <button type="submit" class="nav-link btn btn-link text-dark">All Employee</button>
-                </form>
- 
 
-                <form class="form-inline" asp-action="Register" asp-controller="Room">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Register new rooooooom</button>
-                </form>
-                <form class="form-inline" asp-controller="Room" asp-action="Edit">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Edit room</button>
-                </form>
-                <form class="form-inline" asp-controller="Room" asp-action="Delete">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Delete room</button>
-                </form>
+                <br />
+                <a asp-controller="User" asp-action="Register">Register new user </a>
+                <br />
+                <br />
+                <a asp-controller="User" asp-action="All">All users </a>
+                <br />
+                <br />
+
+                <br />
+                <a asp-controller="Room" asp-action="Register">Register new rooooooom </a>
+                <br />
+                <br />
+                <a asp-controller="Room" asp-action="All">All rooms </a>
+                <br />
+                <br />
+
+
 
                 /*<form class="form-inline" asp-controller="Client" asp-action="Register">
                    <button type="submit" class="nav-link btn btn-link text-dark">Register new Client</button>
@@ -52,14 +53,17 @@
                 //poleta za user
             }
             //poleta i za user i admin
-            <form class="form-inline" asp-controller="Client" asp-action="Register">
-                <button type="submit" class="nav-link btn btn-link text-dark">Register new Client</button>
-            </form>
-            <form class="form-inline" asp-controller="Client" asp-action="Edit">
-                <button type="submit" class="nav-link btn btn-link text-dark">Edit Client</button>
-            </form> <form class="form-inline" asp-controller="Client" asp-action="Delete">
-                <button type="submit" class="nav-link btn btn-link text-dark">Delete Client</button>
-            </form>
+
+
+            <br />
+            <a asp-controller="Client" asp-action="Register">Register new client </a>
+            <br />
+            <br />
+            <a asp-controller="Client" asp-action="All">All clients </a>
+            <br />
+            <br />
+
+
 
             <div>
                 <form class="form-inline" asp-controller="User" asp-action="LogOut">
@@ -69,8 +73,11 @@
         }
         else
         {
+            <p>
+                <font size="9">Welcome To Our Hotel On The Beach</font>
+            </p>
             <div>
-                <a class="nav-link text-dark" asp-controller="User" asp-action="Login">Login</a>
+                <a class="nav-link text-dark" asp-controller="User" asp-action="Login"><font size="5"><b>Login</b></font></a>
             </div>
         }
     </div>

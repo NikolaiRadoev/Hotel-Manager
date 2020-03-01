@@ -100,7 +100,7 @@ namespace HotelManagr.Services
         {
             //throw new NotImplementedException();
             if (editUser.UserName == null ||
-                editUser.Password == null ||
+                //editUser.Password == null ||
                 editUser.FirstName == null ||
                 editUser.MiddleName == null ||
                 editUser.LastName == null ||
@@ -112,27 +112,28 @@ namespace HotelManagr.Services
                 }
             //проверка за коректност на полетата от модела(ready)
 
-            var user = new User
-            {
-                //poletata ot modela => user(ready)
-                UserName = editUser.UserName,
-                Password = editUser.Password,
-                FirstName = editUser.FirstName,
-                MiddleName = editUser.MiddleName,
-                LastName = editUser.LastName,
-                PersonalNumber = editUser.PersonalNumber,
-                PhoneNumber = editUser.PhoneNumber,
-                Email = editUser.Email
-            };
+                User userForEdit = userManager.FindByIdAsync(editUser.Id).Result;
 
+
+                  //poletata ot modela => user(ready)
+                  userForEdit.UserName = editUser.UserName;
+                  // Password = editUser.Password,
+                  userForEdit.FirstName = editUser.FirstName;
+                  userForEdit.MiddleName = editUser.MiddleName;
+                  userForEdit.LastName = editUser.LastName;
+                  userForEdit.PersonalNumber = editUser.PersonalNumber;
+                  userForEdit.PhoneNumber = editUser.PhoneNumber;
+                 userForEdit.Email = editUser.Email;
+
+                  var userEditResult = this.userManager.UpdateAsync(userForEdit).Result;
+
+                  if (!userEditResult.Succeeded)
+                  {
+                      return false;
+                  }
+                  
             //moje bi trqbva da se kaje che samo admin moje
 
-            var userEditResult = await this.userManager.UpdateAsync(user);
-
-            if (!userEditResult.Succeeded)
-            {
-                return false;
-            }
             return true;
         }
 
