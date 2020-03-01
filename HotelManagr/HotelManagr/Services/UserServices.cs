@@ -34,11 +34,12 @@ namespace HotelManagr.Services
         public async Task<bool> LogIn(LogInUserViewModel userLog)
         {
             var user = this.GetUserByName(userLog.UserName).Result;
-            if (user==null)
+            if (user==null|| user.ActiveOrNotActiveAccount==false)
             {
                 return false;
             }
             var result = await this.signInManager.PasswordSignInAsync(user, userLog.Password, isPersistent: false, lockoutOnFailure: false);
+            
             return result.Succeeded;
         }
 
@@ -112,25 +113,26 @@ namespace HotelManagr.Services
                 }
             //проверка за коректност на полетата от модела(ready)
 
-                User userForEdit = userManager.FindByIdAsync(editUser.Id).Result;
+            User userForEdit = userManager.FindByIdAsync(editUser.Id).Result;
 
 
-                  //poletata ot modela => user(ready)
-                  userForEdit.UserName = editUser.UserName;
-                  // Password = editUser.Password,
-                  userForEdit.FirstName = editUser.FirstName;
-                  userForEdit.MiddleName = editUser.MiddleName;
-                  userForEdit.LastName = editUser.LastName;
-                  userForEdit.PersonalNumber = editUser.PersonalNumber;
-                  userForEdit.PhoneNumber = editUser.PhoneNumber;
-                 userForEdit.Email = editUser.Email;
+            //poletata ot modela => user(ready)
+            userForEdit.UserName = editUser.UserName;
+            // Password = editUser.Password,
+            userForEdit.FirstName = editUser.FirstName;
+            userForEdit.MiddleName = editUser.MiddleName;
+            userForEdit.LastName = editUser.LastName;
+            userForEdit.PersonalNumber = editUser.PersonalNumber;
+            userForEdit.PhoneNumber = editUser.PhoneNumber;
+            userForEdit.Email = editUser.Email;
+            userForEdit.ActiveOrNotActiveAccount = editUser.isActive;
 
-                  var userEditResult = this.userManager.UpdateAsync(userForEdit).Result;
+            var userEditResult = this.userManager.UpdateAsync(userForEdit).Result;
 
-                  if (!userEditResult.Succeeded)
-                  {
-                      return false;
-                  }
+            if (!userEditResult.Succeeded)
+            {
+                return false;
+            }
                   
             //moje bi trqbva da se kaje che samo admin moje
 

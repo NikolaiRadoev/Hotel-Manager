@@ -52,7 +52,9 @@ namespace HotelManagr.Controllers
                 LastName = userForEdit.LastName,
                 PersonalNumber = userForEdit.PersonalNumber,
                 PhoneNumber = userForEdit.PhoneNumber,
-                Email = userForEdit.Email
+                Email = userForEdit.Email,
+                isActive= userForEdit.ActiveOrNotActiveAccount
+                
             };
             return View(model);
         }

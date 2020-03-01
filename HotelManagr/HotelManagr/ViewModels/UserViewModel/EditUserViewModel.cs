@@ -34,5 +34,7 @@ namespace HotelManagr.ViewModels.UserViewModel
         [Required]
         [Display(Name = "PhoneNumber")]
         public string PhoneNumber { get; set; }
+
+        public bool isActive { get; set; }
     }
 }
