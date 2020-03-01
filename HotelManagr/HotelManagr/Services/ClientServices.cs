@@ -55,6 +55,24 @@ namespace HotelManagr.Services
         public bool EditClient(EditClientViewModel editClient)
         {
             //throw new NotImplementedException();
+            /*Client client = new Client
+            {
+                FirstName = editClient.FirstName,
+                LastName = editClient.LastName,
+                PhoneNumber = editClient.PhoneNumber,
+                Email = editClient.Email,
+                IsAdult = editClient.IsAdult
+            };
+            this.context.Clients.Update(client);
+            this.context.SaveChanges();
+            return true;*/
+            if (editClient.FirstName==null ||
+                editClient.LastName==null ||
+                editClient.PhoneNumber==null ||
+                editClient.Email==null)
+            {
+                return false;
+            } 
             Client client = new Client
             {
                 FirstName = editClient.FirstName,
@@ -66,6 +84,7 @@ namespace HotelManagr.Services
             this.context.Clients.Update(client);
             this.context.SaveChanges();
             return true;
+
         }
 
         public IEnumerable<Client> GetAll()

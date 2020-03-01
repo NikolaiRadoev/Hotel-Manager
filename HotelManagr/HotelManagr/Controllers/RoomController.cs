@@ -89,5 +89,20 @@ namespace HotelManagr.Controllers
             var client = this.roomServices.GetAll();//ne sam siguren
             return View();
         }
+        //Za Edita i delete(za izobrazqvane na spisuk s potrebiteli(tam s funkciite za edit delete i Details)) 
+        public IActionResult All()
+        {
+            List<Room> Rooms = roomServices.GetAll().ToList();
+            List<EditRoomViewModel> model = Rooms.Select(n => new EditRoomViewModel
+            {
+                Capacity = n.Capacity,
+                RoomType = n.RoomType,
+                FreeRoom = n.FreeRoom,
+                PricePerAdult = n.PricePerAdult,
+                PricePerKid = n.PricePerKid,
+                RoomNumber = n.RoomNumber
+            }).ToList();
+            return View(model);
+        }
     }
 }

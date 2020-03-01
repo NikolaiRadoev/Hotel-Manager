@@ -1,0 +1,71 @@
+﻿@model IEnumerable<HotelManagr.ViewModels.RoomViewModel.EditRoomViewModel>
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>All</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FreeRoom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PricePerAdult)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PricePerKid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FreeRoom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePerAdult)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePerKid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNumber)
+            </td>
+            <td>
+                <!--@@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
+
+                <a asp-controller="Room" asp-action="Edit">Edit</a> |
+                <!--a asp-controller="Room" asp-action="Edit" asp-route-id="(@@item.Id)">Edit</!--a> |-->
+                <a asp-controller="Room" asp-action="Details">Details</a> |
+                <a asp-controller="Room" asp-action="Delete">Delete</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

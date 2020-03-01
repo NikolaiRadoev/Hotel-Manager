@@ -50,6 +50,5 @@ namespace HotelManagr.Data
         {
             optionsBuilder.UseLazyLoadingProxies();
         }
-        public DbSet<HotelManagr.ViewModels.UserViewModel.EditUserViewModel> EditUserViewModel { get; set; }
     }
 }

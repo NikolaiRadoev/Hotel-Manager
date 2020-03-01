@@ -88,5 +88,19 @@ namespace HotelManagr.Controllers
             var client = this.clientServices.GetAll();//ne sam siguren
             return View();
         }
+
+        public IActionResult All()
+        {
+            List<Client> Clients = clientServices.GetAll().ToList();
+            List<EditClientViewModel> model = Clients.Select(q => new EditClientViewModel
+            {
+                FirstName = q.FirstName,
+                LastName = q.LastName,
+                PhoneNumber = q.PhoneNumber,
+                Email = q.Email,
+                IsAdult = q.IsAdult
+            }).ToList();
+            return View(model);
+        }
     }
 }

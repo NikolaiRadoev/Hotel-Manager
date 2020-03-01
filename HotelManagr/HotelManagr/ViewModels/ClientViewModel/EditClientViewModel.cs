@@ -9,6 +9,9 @@ namespace HotelManagr.ViewModels.ClientViewModel
     public class EditClientViewModel
     {
         [Required]
+        [Display(Name = "ID")]
+        public int Id { get; set; }
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]

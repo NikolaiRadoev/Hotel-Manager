@@ -122,6 +122,7 @@ namespace HotelManagr.Controllers
         //GetAll
         //moje bi i GetUser
 
+        //svurzano s Edit i Delete
         public IActionResult All()
         {
             List<Data.Models_Entitys_.User> Users = userServices.GetAll().ToList();
