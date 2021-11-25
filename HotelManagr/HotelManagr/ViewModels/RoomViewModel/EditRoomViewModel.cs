@@ -8,7 +8,6 @@ namespace HotelManagr.ViewModels.RoomViewModel
 {
     public class EditRoomViewModel
     {
-        [Required]
         [Display(Name = "Id")]
         public int Id { get; set; }
         [Required]

@@ -35,13 +35,23 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/Client/All/");
             }
         }
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit( int id)
         {
-            return View();
+            Client clientForEdit = this.context.Clients.Find(id);
+            EditClientViewModel model = new EditClientViewModel
+            {
+                Id = clientForEdit.Id,
+                FirstName = clientForEdit.FirstName,
+                LastName = clientForEdit.LastName,
+                PhoneNumber = clientForEdit.PhoneNumber,
+                Email = clientForEdit.Email,
+                IsAdult = clientForEdit.IsAdult,
+            };
+            return View(model);
         }
         [HttpPost]
         public IActionResult Edit(EditClientViewModel editClient)
@@ -53,15 +63,9 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/Client/All/");
             }
         }
-        [HttpGet]
-        public IActionResult Delete()
-        {
-            return View();
-        }
-        [HttpPost]
         public IActionResult Delete(DeleteClientViewModel deleteClient)
         {
             bool result = clientServices.DeleteClient(deleteClient);
@@ -71,7 +75,7 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/Client/All/");
             }
         }
         [HttpGet]
@@ -94,6 +98,7 @@ namespace HotelManagr.Controllers
             List<Client> Clients = clientServices.GetAll().ToList();
             List<EditClientViewModel> model = Clients.Select(q => new EditClientViewModel
             {
+                Id = q.Id,
                 FirstName = q.FirstName,
                 LastName = q.LastName,
                 PhoneNumber = q.PhoneNumber,

@@ -9,6 +9,9 @@ namespace HotelManagr.ViewModels.RoomViewModel
     public class RegisterRoomViewModel
     {
         [Required]
+        [Display(Name="Id")]
+        public int Id { get; set; }
+        [Required]
         [Display(Name="Capacity")]
         public int Capacity { get; set; }
         [Required]

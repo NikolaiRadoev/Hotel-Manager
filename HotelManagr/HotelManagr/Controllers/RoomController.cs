@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace HotelManagr.Controllers
 {
 
-   // [Authorize(Roles = "Admin")]
+   [Authorize(Roles = "Admin")]
     public class RoomController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -38,13 +38,25 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/Room/All/");
             }
         }
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return View();
+            //Room roomForEdit = this.context.Rooms.Find(id);
+            Room roomForEdit = roomServices.GetRoom(id);
+            EditRoomViewModel model = new EditRoomViewModel
+            {
+                Id=roomForEdit.Id,
+                Capacity=roomForEdit.Capacity,
+                RoomType=roomForEdit.RoomType,
+                FreeRoom=roomForEdit.FreeRoom,
+                PricePerAdult=roomForEdit.PricePerAdult,
+                PricePerKid=roomForEdit.PricePerKid,
+                RoomNumber=roomForEdit.RoomNumber
+            };
+            return View(model);
         }
         [HttpPost]
         public IActionResult Edit(EditRoomViewModel editRoom)
@@ -56,15 +68,9 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/Room/All/");
             }
         }
-        [HttpGet]
-        public IActionResult Delete()
-        {
-            return View();
-        }
-        [HttpPost]
         public IActionResult Delete(DeleteRoomViewModel deleteRoom)
         {
             bool result = roomServices.DeleteRoom(deleteRoom);
@@ -74,7 +80,7 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/Room/All/");
             }
         }
         [HttpGet]
@@ -95,6 +101,7 @@ namespace HotelManagr.Controllers
             List<Room> Rooms = roomServices.GetAll().ToList();
             List<EditRoomViewModel> model = Rooms.Select(n => new EditRoomViewModel
             {
+                Id = n.Id,
                 Capacity = n.Capacity,
                 RoomType = n.RoomType,
                 FreeRoom = n.FreeRoom,

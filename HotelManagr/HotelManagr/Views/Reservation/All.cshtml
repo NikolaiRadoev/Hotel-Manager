@@ -1,0 +1,72 @@
+@model IEnumerable<HotelManagr.ViewModels.ReservationViewModel.EditReservationViewModel>
+
+@{
+    ViewData["Title"] = "All Reservations";
+}
+
+<h1>All Reservations</h1>
+
+<p>
+    <a asp-action="Register">Create New Reservation</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservedRoom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientReservations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckOut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncludeBreakfast)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllInclusive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservedRoom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientReservations)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckOut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncludeBreakfast)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllInclusive)
+            </td>
+            <td>
+                <a asp-controller="Reservation" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="Reservation" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="Reservation" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to DELETE this reservation?')">Delete</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

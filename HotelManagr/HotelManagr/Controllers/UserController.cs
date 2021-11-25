@@ -35,7 +35,7 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/User/All/");
             }
         }
         [HttpGet]
@@ -44,17 +44,15 @@ namespace HotelManagr.Controllers
             User userForEdit = userServices.GetUserById(id).Result;
             EditUserViewModel model = new EditUserViewModel
             {
-                Id = userForEdit.Id,
-                FirstName = userForEdit.FirstName,
-                Password = userForEdit.Password,
-                UserName = userForEdit.UserName,
-                MiddleName = userForEdit.MiddleName,
-                LastName = userForEdit.LastName,
-                PersonalNumber = userForEdit.PersonalNumber,
-                PhoneNumber = userForEdit.PhoneNumber,
-                Email = userForEdit.Email,
-                isActive= userForEdit.ActiveOrNotActiveAccount
-                
+                Id=userForEdit.Id,
+                UserName=userForEdit.UserName,
+                FirstName=userForEdit.FirstName,
+                MiddleName=userForEdit.MiddleName,
+                LastName=userForEdit.LastName,
+                Email=userForEdit.Email,
+                Password=userForEdit.Password,
+                PersonalNumber=userForEdit.PersonalNumber,
+                PhoneNumber=userForEdit.PhoneNumber
             };
             return View(model);
         }
@@ -68,20 +66,10 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/User/All/");
             }
         }
-        [HttpGet]
-        public IActionResult Delete()
-        {
-            //User userForDelete = userServices.GetUserById(id).Result;
-            //RemoveUserViewModel model = new RemoveUserViewModel
-            //{
-             //   Id = userForDelete.Id
-           // };
-            return View();
-        }
-        [HttpPost]
+
         public IActionResult Delete(RemoveUserViewModel removeUser)
         {
             bool result = userServices.RemoveUserById(removeUser).Result;
@@ -91,7 +79,7 @@ namespace HotelManagr.Controllers
             }
             else
             {
-                return Redirect("/");
+                return Redirect("/User/All/");
             }
         }
 
@@ -138,7 +126,8 @@ namespace HotelManagr.Controllers
                 LastName = u.LastName,
                 PersonalNumber = u.PersonalNumber,
                 PhoneNumber = u.PhoneNumber,
-                Email = u.Email
+                Email = u.Email,
+                Password=u.Password
 
 
             }).ToList();

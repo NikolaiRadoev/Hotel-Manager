@@ -33,21 +33,18 @@ namespace HotelManagr.Services
             };
             this.context.Rooms.Add(room);
             this.context.SaveChanges();
-            /*room = GetRoom(newRoom.Id);
+            room = GetRoom(room.Id);
             if (room is null)
             {
                 return false;
-            }*/
+            }
             return true;
         }
 
         public bool DeleteRoom(DeleteRoomViewModel deleteRoom)
         {
             //throw new NotImplementedException();
-            Room room = new Room
-            {
-                Id = deleteRoom.Id
-            };
+            Room room = context.Rooms.Find(deleteRoom.Id);
             this.context.Rooms.Remove(room);
             this.context.SaveChanges();
             return true;
@@ -77,7 +74,7 @@ namespace HotelManagr.Services
                 return false;
             }
 
-            Room roomForEdit = context.Rooms.Find(editRoom.Id);
+            Room roomForEdit = this.context.Rooms.Find(editRoom.Id);
 
             roomForEdit.Capacity = editRoom.Capacity;
             roomForEdit.RoomType = editRoom.RoomType;

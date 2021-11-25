@@ -1,0 +1,36 @@
+@model HotelManagr.ViewModels.ReservationViewModel.RegisterReservationViewModel
+<main class="mt-3">
+    <h1 class="text-center">Register</h1>
+    <hr class="bg-secondary half-width" />
+    <form class="mx-auto half-width" method="post" asp-controller="Reservation" asp-action="Register">
+        <div class="form-group">
+            <label asp-for="ReservedRoom">ReservedRoom</label>
+            <input asp-for="ReservedRoom" class="form-control" id="reservedroom" placeholder="ReservedRoom...">
+        </div>
+        <div class="form-group">
+            <label asp-for="ClientReservations">ClientReservations</label>
+            <!--<label asp-for="FirstName" class="form-control" id="firstname" placeholder="Firstname...">-->
+            <input asp-for="ClientReservations" class="form-control" id="clientreservations" placeholder="ClientReservations...">
+        </div>
+        <div class="form-group">
+            <label asp-for="CheckIn">CheckIn</label>
+            <input asp-for="CheckIn" class="form-control" id="checkin" placeholder="CheckIn...">
+        </div>
+        <div class="form-group">
+            <label asp-for="CheckOut">CheckOut</label>
+            <input asp-for="CheckOut" class="form-control" id="checkout" placeholder="CheckOut...">
+        </div>
+        <div class="form-group">
+            <label asp-for="IncludeBreakfast">IncludeBreakfast</label>
+            <input asp-for="IncludeBreakfast" class="form-control" id="includebreakfast" placeholder="IncludeBreakfast...">
+        </div>
+        <div class="form-group">
+            <label asp-for="AllInclusive">AllInclusive</label>
+            <input asp-for="AllInclusive" class="form-control" id="allinclusive" placeholder="AllInclusive...">
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn chushka-bg-color">Register</button><!--v toq klas btn chushka-bg-color mai trq da e po drug nachin-->
+        </div>
+    </form>
+
+</main>

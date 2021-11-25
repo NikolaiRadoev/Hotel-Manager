@@ -62,6 +62,7 @@ namespace HotelManagr
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IRoomServices, RoomServices>();
             services.AddTransient<IClientServices, ClientServices>();
+            services.AddTransient<IReservationServices, ReservationServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

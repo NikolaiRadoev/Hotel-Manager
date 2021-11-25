@@ -1,17 +1,20 @@
 ﻿@model IEnumerable<HotelManagr.ViewModels.RoomViewModel.EditRoomViewModel>
 
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "All Rooms";
 }
 
-<h1>All</h1>
+<h1>All Rooms</h1>
 
 <p>
-    <a asp-action="Register">Create New</a>
+    <a asp-action="Register">Create New Room</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Capacity)
             </th>
@@ -37,6 +40,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Capacity)
             </td>
             <td>
@@ -55,14 +61,9 @@
                 @Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
             <td>
-                <!--@@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
-
-                <a asp-controller="Room" asp-action="Edit">Edit</a> |
-                <!--a asp-controller="Room" asp-action="Edit" asp-route-id="(@@item.Id)">Edit</!--a> |-->
-                <a asp-controller="Room" asp-action="Details">Details</a> |
-                <a asp-controller="Room" asp-action="Delete">Delete</a>
+                <a asp-controller="Room" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="Room" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="Room" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to DELETE this room?')">Delete</a>
 
             </td>
         </tr>

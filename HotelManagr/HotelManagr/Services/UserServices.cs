@@ -156,10 +156,11 @@ namespace HotelManagr.Services
             {
                 return false;
             }
-            var user = new User
+            /*var user = new User
             {
                 Id = userId.Id
-            };
+            };*/
+            User user = userManager.FindByIdAsync(userId.Id).Result;
 
             //i tuka moje bi trqbva da se kaje che samo admin moje
 
